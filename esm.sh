@@ -51,12 +51,12 @@ get-options() {
 		case "${OPTIONS}" in
 			-) case "${OPTARG}" in
 				  region) REGION="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
-				    list) LIST_SNAPS=true; LIST_VOLS=false; long-opt		;;
-				 volumes) LIST_VOLS=true; LIST_SNAPS=false; long-opt		;;
-				instance) INSTANCE=true; long-opt		;;
+				    list) LIST_SNAPS=true; LIST_VOLS=false; long-opt	;;
+				 volumes) LIST_VOLS=true; LIST_SNAPS=false; long-opt	;;
+				instance) INSTANCE=true; long-opt	;;
 				 archive) is-number "${!OPTIND}" && ARCHIVE="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
-				  dryrun) DRYRUN=true; long-opt		;;
-				  prompt) PROMPT=true; long-opt		;;
+				  dryrun) DRYRUN=true; long-opt	;;
+				  prompt) PROMPT=true; long-opt	;;
 				   quiet) QUIET=true; PROMPT=false; long-opt	;;
 				    fail) WARN_FAIL=true; long-opt	;;
 				 verbose) VERBOSE=true; QUIET=false; long-opt	;;
@@ -69,8 +69,8 @@ get-options() {
 			V) LIST_VOLS=true; LIST_SNAPS=false	;;
 			i) INSTANCE=true	;;
 			a) is-number "$OPTARG" && ARCHIVE="$OPTARG"	;;
-			d) DRYRUN=true		;;
-			p) PROMPT=true		;;
+			d) DRYRUN=true	;;
+			p) PROMPT=true	;;
 			q) QUIET=true; PROMPT=false; VERBOSE=false	;;
 			F) WARN_FAIL=true;	;;
 			v) VERBOSE=true; QUIET=false	;;
@@ -92,8 +92,8 @@ output() {
 	local switch="$1"; local msg="$2"
 	case "$switch" in
 		message) echo -ne "$msg"	;;
-		 result) echo "$msg"		;;
-		   info) logger -s -p local0.info -t 'Info: esm.sh' "'${msg}'"		;;
+		 result) echo "$msg"	;;
+		   info) logger -s -p local0.info -t 'Info: esm.sh' "'${msg}'"	;;
 		   warn) logger -is -p local0.warn -t 'Warning: esm.sh' "'${msg}'"	;;
 		 optmis) echo "Missing option value :: $msg"; exit 1	;;
 		 badopt) echo "Unknown option given :: $msg"; exit 1	;;
