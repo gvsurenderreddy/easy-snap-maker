@@ -5,6 +5,8 @@ Copyright (c) 2013 Jon Retting
 
 Pre-Alpha v0.03
 
+NON-FUNCTIONING
+
 INFO:
 -----
 <tag-name> is the value of the "Name" tag given to your volume or instance (without <>)
@@ -36,5 +38,5 @@ OPTIONS:
 EXAMPLES:
 ---------
 Creates a snapshot from the Volume with the Tag:Name "my-snap-tag" in us-west-1 region and removes snapshots with the same tag keeping only the last two.
-_____________________
+
 `./create-snap.sh my-snap-tag -r us-west-1 -a 2`
