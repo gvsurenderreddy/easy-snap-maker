@@ -42,7 +42,7 @@ Example: create-snap.sh my-snap-tag -z us-west-1 -a 2
 <tag-name> is the value of the \"Name\" tag given to your volume or instance (without <>)
 <tag-name> required else if --list or --volumes is envoked
 If tag-name is \" - \" asumes stdin piped for <tag-name>
-Requires: $AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
+Requires: \$AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
 Dependencies: AWS CLI Tools"
 }
 get-options() {
