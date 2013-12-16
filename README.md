@@ -5,6 +5,11 @@ Copyright (c) 2013 Jon Retting
 
 INFO:
 -----
+<tag-name> is the value of the "Name" tag given to your volume or instance (without <>)
+<tag-name> required else if --list or --volumes is envoked
+If tag-name is " - " asumes stdin piped for <tag-name>
+Requires: $AWS_ACCESS_KEY, $AWS_SECRET_KEY, and $JAVA_HOME environmental variables
+Dependencies: AWS CLI Tools"
 
 USAGE:
 ------
@@ -12,7 +17,7 @@ USAGE:
 
 OPTIONS:
 --------
-    -r    --region       AWS Region (required if \$EC2_URL env var is not set)
+    -r    --region       AWS Region (required if $EC2_URL env var is not set)
     -L    --list         List snapshots (stdout=tag-name/snap-id/date-created)
     -V    --volumes      List volumes (stdout=tag-name/vol-id/mount-state/instance-id)
     -i    --instance     Lookup tag-name against Instances selects root vol for snapshot
@@ -30,11 +35,3 @@ EXAMPLES:
 ---------
 Creates a snapshot from the Volume with the Tag:Name "my-snap-tag" in us-west-1 region and removes snapshots with the same tag keeping only the last two.
 `./create-snap.sh my-snap-tag -r us-west-1 -a 2`
-
-MORE INFO:
-----------
-<tag-name> is the value of the \"Name\" tag given to your volume or instance (without <>)
-<tag-name> required else if --list or --volumes is envoked
-If tag-name is \" - \" asumes stdin piped for <tag-name>
-Requires: \$AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
-Dependencies: AWS CLI Tools"
