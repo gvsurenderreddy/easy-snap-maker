@@ -19,15 +19,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-VERSION="0.01"
+VERSION="0.02"
 
 usage() {
 	echo "AWS Easy Snapshot Maker -- v${VERSION}
-Usage:   create-snap [-L | -V] | <tag-name> [-z] [-a=N] [-d] [-q] [-p] [-h] [-v]
+Usage:   create-snap [-L | -V] | <tag-name> [-r region] [-a N] [-idpqvh] 
 Example: create-snap my-snap-tag -z us-west-1 -a 2
--r     --region       AWS Region (required if $EC2_URL env var is not set)
--L     --list         List snapshots (needs opts, stdout: snap-id, tag:Name, date created)
--V     --volumes      List volumes (needs opts, stdout: vol-id, tag:Name, mount-state/instance-id)
+-r     --region       AWS Region (required if \$EC2_URL env var is not set)
+-L     --list         List snapshots (stdout= snap-id, tag:Name=VALUE, date created)
+-V     --volumes      List volumes (stdout= vol-id, tag:Name=VALUE, mount-state/instance-id)
 -i     --instance     Looks for tag:Name=VALUE for Instances uses root vol (default is Volumes)
 -a=N   --archive=N    Keep N snapshots removes >N old (default=0, old volumes must have same <tag-name>)
 -d     --dryrun       Do a test run without making changes
@@ -39,7 +39,7 @@ Example: create-snap my-snap-tag -z us-west-1 -a 2
 -h     --help         Display this cruft
        --version      Show version info
 <tag-name> is the value of the \"Name\" tag given to your volume or instance (without <>)
-<tag-name> is required else if --list or --volumes is envoked
+<tag-name> required else if --list or --volumes is envoked
 If tag-name is \" - \" asumes stdin piped for tag:Name=VALUE
 Requires: \$AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
 Dependencies: AWS CLI Tools"
