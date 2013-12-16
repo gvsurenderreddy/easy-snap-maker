@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # NAME: AWS Easy Snapshot Maker
-# DESC: Automates the snapshot creation process, aslo list snapshots and volumes
+# DESC: Automates the snapshot creation process, also list snapshots and volumes
 # GIT:
 # URL: 
 # 
