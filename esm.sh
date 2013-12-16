@@ -50,47 +50,46 @@ get-options() {
 	while getopts "$opts" OPTIONS; do
 		case "${OPTIONS}" in
 			-)	case "${OPTARG}" in
-				  region)	REGION="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
-			   	    list)	LIST_SNAPS=true; LIST_VOLS=false; long-opt		;;
-				 volumes)	LIST_VOLS=true; LIST_SNAPS=false; long-opt		;;
-				instance)	INSTANCE=true; long-opt		;;
-				 archive)	is-number "${!OPTIND}" && ARCHIVE="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
-				  dryrun)	DRYRUN=true; long-opt		;;
-				  prompt)	PROMPT=true; long-opt		;;
-				   quiet)	QUIET=true; PROMPT=false; long-opt	;;
-					fail)	WARN_FAIL=true; long-opt	;;
-				 verbose)	VERBOSE=true; QUIET=false; long-opt	;;
-					help)	usage; exit 0	;;
-				 version)	usage | head -n 1; exit 0	;;
-				       *)	output badopt "--${OPTARG}"	;;
-				esac
-			;;
-			r)	REGION="$OPTARG"	;;
-			L)	LIST_SNAPS=true; LIST_VOLS=false	;;
-			V)	LIST_VOLS=true; LIST_SNAPS=false	;;
-			i)	INSTANCE=true	;;
-			a)	is-number "$OPTARG" && ARCHIVE="$OPTARG"	;;
-			d)	DRYRUN=true		;;
-			p)	PROMPT=true		;;
-			q)	QUIET=true; PROMPT=false; VERBOSE=false	;;
-			F)	WARN_FAIL=true;	;;
-			v)	VERBOSE=true; QUIET=false	;;
-			h)	usage; exit 0	;;
-			:)	output optmis "-$OPTARG"	;;
-			*)	output badopt "-$OPTARG"	;;
+				  region) REGION="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
+			   	    list) LIST_SNAPS=true; LIST_VOLS=false; long-opt		;;
+				 volumes) LIST_VOLS=true; LIST_SNAPS=false; long-opt		;;
+				instance) INSTANCE=true; long-opt		;;
+				 archive) is-number "${!OPTIND}" && ARCHIVE="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
+				  dryrun) DRYRUN=true; long-opt		;;
+				  prompt) PROMPT=true; long-opt		;;
+				   quiet) QUIET=true; PROMPT=false; long-opt	;;
+					fail) WARN_FAIL=true; long-opt	;;
+				 verbose) VERBOSE=true; QUIET=false; long-opt	;;
+					help) usage; exit 0	;;
+				 version) usage | head -n 1; exit 0	;;
+				       *) output badopt "--${OPTARG}"	;;
+				esac	;;
+			r) REGION="$OPTARG"	;;
+			L) LIST_SNAPS=true; LIST_VOLS=false	;;
+			V) LIST_VOLS=true; LIST_SNAPS=false	;;
+			i) INSTANCE=true	;;
+			a) is-number "$OPTARG" && ARCHIVE="$OPTARG"	;;
+			d) DRYRUN=true		;;
+			p) PROMPT=true		;;
+			q) QUIET=true; PROMPT=false; VERBOSE=false	;;
+			F) WARN_FAIL=true;	;;
+			v) VERBOSE=true; QUIET=false	;;
+			h) usage; exit 0	;;
+			:) output optmis "-$OPTARG"	;;
+			*) output badopt "-$OPTARG"	;;
 		esac
 	done
 }
 output() {
 	local switch="$1"; local msg="$2"
 	case "$switch" in
-		message)	echo -ne "$msg"		;;
-		 result)	echo "$msg"			;;
-		   info)	logger -s -p local0.info -t 'Info: esm.sh' "'${msg}'"			;;
-		   warn)	logger -is -p local0.warn -t 'Warning: esm.sh' "'${msg}'"		;;
-	     optmis)	echo "Missing option value :: $msg"; exit 1			;;
-		 badopt)	echo "Unknown option given :: $msg"; exit 1			;;
-		  error)	logger -is -p local0.err -t 'Error: esm.sh' "'${msg}'"; exit 1	;;
+		message) echo -ne "$msg"	;;
+		 result) echo "$msg"		;;
+		   info) logger -s -p local0.info -t 'Info: esm.sh' "'${msg}'"		;;
+		   warn) logger -is -p local0.warn -t 'Warning: esm.sh' "'${msg}'"	;;
+	     optmis) echo "Missing option value :: $msg"; exit 1	;;
+		 badopt) echo "Unknown option given :: $msg"; exit 1	;;
+		  error) logger -is -p local0.err -t 'Error: esm.sh' "'${msg}'"; exit 1	;;
 	esac
 }
 ask() {
