@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # NAME: AWS Easy Snapshot Maker
 # DESC: Automates the snapshot creation process, also list snapshots and volumes
-# GIT:
-# URL: 
+# GIT: git@github.com:jonretting/easy-snap-maker.git
+# URL: https://github.com/jonretting/easy-snap-maker
 # 
 # Copyright (c) 2013 Jon Retting
 #
@@ -22,7 +22,7 @@
 VERSION="0.03"
 
 usage() {
-	echo "AWS Easy Snapshot Maker v${VERSION}
+	echo -e "AWS Easy Snapshot Maker v${VERSION}
 Desc:	Creates snapshots from volume via tag:Name=VALUE
 Usage:   create-snap.sh [-L | -V] | <tag-name> [-r region] [-a N] [-idpqvh] 
 Example: create-snap.sh my-snap-tag -z us-west-1 -a 2
@@ -42,7 +42,7 @@ Example: create-snap.sh my-snap-tag -z us-west-1 -a 2
 <tag-name> is the value of the \"Name\" tag given to your volume or instance (without <>)
 <tag-name> required else if --list or --volumes is envoked
 If tag-name is \" - \" asumes stdin piped for <tag-name>
-Requires: \$AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
+Requires: $AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
 Dependencies: AWS CLI Tools"
 }
 get-options() {
@@ -101,7 +101,7 @@ output() {
 	esac
 }
 ask() {
-	while true;do
+	while true; do
 		[ "$2" ] && { local pmt="$2";local def=; }; [ "$2" ] || { local pmt="y/n";local def=; }
 		$YES_TO_ALL && { local RPY=Y;local def=Y; }; [ -z "$def" ] && { echo -ne "$1 ";read -p "[$pmt] " RPY; }
 		[ -z "$RPY" ] && local RPY=$def; case "$RPY" in Y*|y*) return 0;; N*|n*) return 1;;1*) return 0;;2*) return 1;;esac
