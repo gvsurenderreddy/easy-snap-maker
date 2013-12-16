@@ -2,7 +2,6 @@ AWS Easy Snapshot Maker (ESM)
 =============================
 ### Automates the Amazon Web Services (AWS) snapshot creation process, also lists snapshots and volumes
 Copyright (c) 2013 Jon Retting
-
 Pre-Alpha v0.03
 
 INFO:
