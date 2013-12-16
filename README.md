@@ -8,7 +8,7 @@ INFO:
 
 USAGE:
 ------
-`create-snap [-L | -V] | <tag-name> [-r region] [-a=N] [-idpqvh]`
+`create-snap.sh [-L | -V] | <tag-name> [-r region] [-a=N] [-idpqvh]`
 
 OPTIONS:
 --------
@@ -29,7 +29,7 @@ OPTIONS:
 EXAMPLES:
 ---------
 Creates a snapshot from the Volume with the Tag:Name "my-snap-tag" in us-west-1 region and removes snapshots with the same tag keeping only the last two.
-`create-snap my-snap-tag -r us-west-1 -a 2`
+`./create-snap.sh my-snap-tag -r us-west-1 -a 2`
 
 MORE INFO:
 ----------
