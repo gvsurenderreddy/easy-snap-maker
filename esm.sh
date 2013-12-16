@@ -65,7 +65,7 @@ long-opt() {
 	OPTIND=$(($OPTIND + 1))
 }
 get-options() {
-	local opts=":a:l:-:"
+	local opts=":r:LVidpqFvha:-:"
 	while getopts "$opts" OPTIONS; do
 		case "${OPTIONS}" in
 			-)	case "${OPTARG}" in
