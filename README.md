@@ -3,6 +3,8 @@ AWS Easy Snapshot Maker (ESM)
 ### Automates the snapshot creation process, also lists snapshots and volumes
 Copyright (c) 2013 Jon Retting
 
+Pre-Alpha v0.03
+
 INFO:
 -----
 <tag-name> is the value of the "Name" tag given to your volume or instance (without <>)
