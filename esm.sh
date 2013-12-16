@@ -44,26 +44,6 @@ If tag-name is \" - \" asumes stdin piped for <tag-name>
 Requires: \$AWS_ACCESS_KEY, \$AWS_SECRET_KEY, and \$JAVA_HOME environmental variables
 Dependencies: AWS CLI Tools"
 }
-output() {
-	local switch="$1"; local msg="$2"
-	case "$switch" in
-		message)	echo -ne "$msg"		;;
-		 result)	echo "$msg"			;;
-		   info)	logger -s -p local0.info -t 'Info: esm.sh' "'${msg}'"			;;
-		   warn)	logger -is -p local0.warn -t 'Warning: esm.sh' "'${msg}'"		;;
-	     optmis)	echo "Missing option value :: $msg"; exit 1			;;
-		 badopt)	echo "Unknown option given :: $msg"; exit 1			;;
-		  error)	logger -is -p local0.err -t 'Error: esm.sh' "'${msg}'"; exit 1	;;
-	esac
-}
-is-number() {
-	[[ -z "$1" ]] && output error "-a | --archive cannot be null"
-	[[ "$1" =~ ^[0-9]+$ ]] || output error "-a | --archive is not a number :: $1"
-}
-long-opt() {
-	[[ "$2" == "var" ]] && [[ -z "$1" ]] && output optmis "--$2"
-	OPTIND=$(($OPTIND + 1))
-}
 get-options() {
 	local opts=":r:LVidpqFvha:-:"
 	while getopts "$opts" OPTIONS; do
@@ -99,6 +79,33 @@ get-options() {
 			*)	output badopt "-$OPTARG"	;;
 		esac
 	done
+}
+output() {
+	local switch="$1"; local msg="$2"
+	case "$switch" in
+		message)	echo -ne "$msg"		;;
+		 result)	echo "$msg"			;;
+		   info)	logger -s -p local0.info -t 'Info: esm.sh' "'${msg}'"			;;
+		   warn)	logger -is -p local0.warn -t 'Warning: esm.sh' "'${msg}'"		;;
+	     optmis)	echo "Missing option value :: $msg"; exit 1			;;
+		 badopt)	echo "Unknown option given :: $msg"; exit 1			;;
+		  error)	logger -is -p local0.err -t 'Error: esm.sh' "'${msg}'"; exit 1	;;
+	esac
+}
+ask() {
+	while true;do
+		[ "$2" ] && { local pmt="$2";local def=; }; [ "$2" ] || { local pmt="y/n";local def=; }
+		$YES_TO_ALL && { local RPY=Y;local def=Y; }; [ -z "$def" ] && { echo -ne "$1 ";read -p "[$pmt] " RPY; }
+		[ -z "$RPY" ] && local RPY=$def; case "$RPY" in Y*|y*) return 0;; N*|n*) return 1;;1*) return 0;;2*) return 1;;esac
+	done
+}
+is-number() {
+	[[ -z "$1" ]] && output error "-a | --archive cannot be null"
+	[[ "$1" =~ ^[0-9]+$ ]] || output error "-a | --archive is not a number :: $1"
+}
+long-opt() {
+	[[ "$2" == "var" ]] && [[ -z "$1" ]] && output optmis "--$2"
+	OPTIND=$(($OPTIND + 1))
 }
 get-name() {
 	local args="$@"
