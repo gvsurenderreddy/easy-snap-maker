@@ -24,8 +24,8 @@ VERSION="0.03"
 usage() {
 	echo "AWS Easy Snapshot Maker v${VERSION}
 Desc:	Creates snapshots from volume via tag:Name=VALUE
-Usage:   create-snap [-L | -V] | <tag-name> [-r region] [-a N] [-idpqvh] 
-Example: create-snap my-snap-tag -z us-west-1 -a 2
+Usage:   create-snap.sh [-L | -V] | <tag-name> [-r region] [-a N] [-idpqvh] 
+Example: create-snap.sh my-snap-tag -z us-west-1 -a 2
 -r    --region       AWS Region (required if \$EC2_URL env var is not set)
 -L    --list         List snapshots (stdout=tag-name/snap-id/date-created)
 -V    --volumes      List volumes (stdout=tag-name/vol-id/mount-state/instance-id)
