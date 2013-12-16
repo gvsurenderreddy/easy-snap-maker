@@ -23,21 +23,22 @@ VERSION="0.03"
 
 usage() {
 	echo "AWS Easy Snapshot Maker v${VERSION}
+Desc:	Creates snapshots from volume via tag:Name=VALUE
 Usage:   create-snap [-L | -V] | <tag-name> [-r region] [-a N] [-idpqvh] 
 Example: create-snap my-snap-tag -z us-west-1 -a 2
--r     --region       AWS Region (required if \$EC2_URL env var is not set)
--L     --list         List snapshots (stdout= snap-id, <tag-name>, date created)
--V     --volumes      List volumes (stdout= vol-id, tag:Name=VALUE, mount-state/instance-id)
--i     --instance     Looks for <tag-name> against Instances selects root vol (default is Volume <tag-name>)
--a=N   --archive=N    Keep N snapshots removes >N old (default=0, old volumes must have same <tag-name>)
--d     --dryrun       Do a test run without making changes
--p     --prompt       Prompts to continue/cancel after each execution process
--q     --quiet        Dont output anything to stdout
--E     --email        Email job start and completion or failure information
--F     --fail         Exit script with error on all warning (default is to continue)
--v     --verbose      Output more information
--h     --help         Display this cruft
-       --version      Show version info
+-r    --region       AWS Region (required if \$EC2_URL env var is not set)
+-L    --list         List snapshots (stdout=tag-name/snap-id/date-created)
+-V    --volumes      List volumes (stdout=tag-name/vol-id/mount-state/instance-id)
+-i    --instance     Lookup tag-name against Instances selects root vol for snapshot
+-a=N  --archive=N    Keep N snapshots removes snaps>N old (default=0)
+-d    --dryrun       Do a test run without making changes
+-p    --prompt       Prompts to continue/cancel after each execution process
+-q    --quiet        Dont output anything to stdout
+-E    --email        Email job start and completion or failure information
+-F    --fail         Exit script with error on all warning (default=continue)
+-v    --verbose      Output more information
+-h    --help         Display this cruft
+      --version      Show version info
 <tag-name> is the value of the \"Name\" tag given to your volume or instance (without <>)
 <tag-name> required else if --list or --volumes is envoked
 If tag-name is \" - \" asumes stdin piped for <tag-name>
