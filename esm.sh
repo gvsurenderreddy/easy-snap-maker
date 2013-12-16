@@ -80,6 +80,14 @@ get-options() {
 		esac
 	done
 }
+long-opt() {
+	[[ "$2" == "var" ]] && [[ -z "$1" ]] && output optmis "--$2"
+	OPTIND=$(($OPTIND+1))
+}
+is-number() {
+	[[ -z "$1" ]] && output error "-a | --archive cannot be null"
+	[[ "$1" =~ ^[0-9]+$ ]] || output error "-a | --archive is not a number :: $1"
+}
 output() {
 	local switch="$1"; local msg="$2"
 	case "$switch" in
@@ -99,24 +107,7 @@ ask() {
 		[ -z "$RPY" ] && local RPY=$def; case "$RPY" in Y*|y*) return 0;; N*|n*) return 1;;1*) return 0;;2*) return 1;;esac
 	done
 }
-is-number() {
-	[[ -z "$1" ]] && output error "-a | --archive cannot be null"
-	[[ "$1" =~ ^[0-9]+$ ]] || output error "-a | --archive is not a number :: $1"
-}
-long-opt() {
-	[[ "$2" == "var" ]] && [[ -z "$1" ]] && output optmis "--$2"
-	OPTIND=$(($OPTIND + 1))
-}
-get-name() {
-	local args="$@"
-	NAME=$(echo "$args" | sed 's/\-.*\ *//')
-}
-
 
 get-options "$@" && shift $((OPTIND-1))
 
-
-#echo "$ARGS"
-
-#echo $ALONG
 exit 0
