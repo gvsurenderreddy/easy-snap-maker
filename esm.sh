@@ -51,7 +51,7 @@ get-options() {
 		case "${OPTIONS}" in
 			-) case "${OPTARG}" in
 				  region) REGION="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
-			   	    list) LIST_SNAPS=true; LIST_VOLS=false; long-opt		;;
+				    list) LIST_SNAPS=true; LIST_VOLS=false; long-opt		;;
 				 volumes) LIST_VOLS=true; LIST_SNAPS=false; long-opt		;;
 				instance) INSTANCE=true; long-opt		;;
 				 archive) is-number "${!OPTIND}" && ARCHIVE="${!OPTIND}"; long-opt "${!OPTIND}" var	;;
